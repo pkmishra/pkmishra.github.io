@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: productivity | Pradeep Mishra]]></title>
+  <link href="http://pkmishra.github.io/blog/categories/productivity/atom.xml" rel="self"/>
+  <link href="http://pkmishra.github.io/"/>
+  <updated>2013-07-17T00:10:58-04:00</updated>
+  <id>http://pkmishra.github.io/</id>
+  <author>
+    <name><![CDATA[Pradeep Kumar Mishra]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Scala, SBT and IntellijIdea boilerplate]]></title>
+    <link href="http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/"/>
+    <updated>2013-01-16T23:33:00-05:00</updated>
+    <id>http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate</id>
+    <content type="html"><![CDATA[<p>As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
+1. <a href="" title="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
+2. sbt 0.12.1 installed.</p>
+
+<p>Please note that sbt0.12 doesn&rsquo;t support scala 2.10 therefore this help is for those who wants to set up sbt 0.12 with scala 2.10. <br />
+Alright let the fun begin now&hellip;<br />
++ run following command to download the template project <br />
+<code>g8 pkmishra/scala-sbt-idea-boilerplate.g8</code> <br />
+This will prompt you to give values to variables like project <code>name</code>, <code>organization</code>, <code>version</code> and <code>scalaVersion</code>. You may also select the default values. The template project is located at <a href="https://github.com/pkmishra/scala-sbt-idea-boilerplate.g8">scala-sbt-idea-boilerplate</a> <br />
++ make directory called ~/.sbt/plugins and created file build.sbt if it doesn&rsquo;t exist already. <br/>
++ Write following lines to this build.sbt file so that sbt-idea plugin may be downloaded which is going to be used later&hellip; <br /></p>
+
+<p>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>build.sbt </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">sbt._</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">Defaults._</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">resolvers</span> <span class="o">+=</span> <span class="s">&quot;Sonatype snapshots&quot;</span> <span class="n">at</span> <span class="s">&quot;http://oss.sonatype.org/content/repositories/snapshots/&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="n">sbtPluginExtra</span><span class="o">(</span>
+</span><span class='line'>   <span class="n">m</span> <span class="k">=</span> <span class="s">&quot;com.github.mpeltonen&quot;</span> <span class="o">%</span> <span class="s">&quot;sbt-idea&quot;</span> <span class="o">%</span> <span class="s">&quot;1.3.0-SNAPSHOT&quot;</span><span class="o">,</span> <span class="c1">// Plugin module name and version</span>
+</span><span class='line'>   <span class="n">sbtV</span> <span class="k">=</span> <span class="s">&quot;0.12&quot;</span><span class="o">,</span>    <span class="c1">// SBT version</span>
+</span><span class='line'>   <span class="n">scalaV</span> <span class="k">=</span> <span class="s">&quot;2.9.2&quot;</span>    <span class="c1">// Scala version compiled the plugin</span>
+</span><span class='line'><span class="o">)</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+</p>
+
+
+<ul>
+<li>Now go to the root of the project you have generated (e.g. if you have keep it default name should be basic-project) and run following command.<br />
+sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
+This will generate all the idea project files. <br /></li>
+<li>Boom!! now you can open Idea IDE and open the project. To see the output just run command sbt run.</li>
+<li><em>Make sure to run following command everytime you add/remove a new dependency in your project build.sbt file.</em> <br />
+sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
+This will keep everything upto date and you won&rsquo;t get any compilation error in Intellij Idea. Hope this helps!!!</li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[A blog on technologies, people, processes and related stuff]]></title>
+  <title><![CDATA[Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2013-07-16T23:18:07-04:00</updated>
+  <updated>2013-07-17T00:10:58-04:00</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -12,5 +12,256 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Scrapy: run using TOR and multiple agents Part 2]]></title>
+    <link href="http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu/"/>
+    <updated>2013-04-16T21:22:00-04:00</updated>
+    <id>http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu</id>
+    <content type="html"><![CDATA[<p>As discussed in <a href="" title="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
+
+<ul>
+<li>Add tor repository to your ubuntu repository list (See <a href="" title="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;deb  http://deb.torproject.org/torproject.org quantal main&quot;</span> | sudo tee -a /etc/apt/sources.list
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>  Here quantal is the release name for Ubuntu 12.10 release. If you are running any other version of ubuntu change it accordingly.
++ add gpg keys to sign the package</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>gpg --keyserver keys.gnupg.net --recv 886DDD89
+</span><span class='line'>gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Now referesh the package and install tor</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
+</span><span class='line'>apt-get install deb.torproject.org-keyring
+</span><span class='line'>apt-get install tor
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Install Polipo install using apt-get install polipo and change the configuration as described in last post. Everything else remains same i.e. by default polipo is using 8123 and Tor 9050 so you don&rsquo;t have to modify anything.</li>
+<li>By default Tor and polipo will be installed as service. So after changing configuration you must restart polipo service</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>using sudo /etc/init.d/polipo restart
+</span><span class='line'><span class="o">(</span>you can use same comand to start/stop both the services<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>Now check whether tor is working fine or not by running</li>
+</ul>
+
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>curl --proxy http://localhost:8123 https://check.torproject.org/ | grep <span class="s2">&quot;Congratulations. Your browser is configured to use Tor&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You can see you will get this text displayed if everything is working. You are all set now.
+Hope this helps</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Scrapy: run using TOR and multiple agents]]></title>
+    <link href="http://pkmishra.github.io/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac/"/>
+    <updated>2013-03-18T20:02:00-04:00</updated>
+    <id>http://pkmishra.github.io/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac</id>
+    <content type="html"><![CDATA[<p><a href="http://scrapy.org">Scrapy</a> is a brilliant and well documented crawler written in python. Though it is not as scalable as Apache Nutch but it can easily handle thousands of sites easily. You can get up and running very quickly using the official documentation.
+<a href="https://www.torproject.org/">Tor</a> gives you power to keep your privacy and security.Tor can hide you so that website can not track your identity. You may read more about TOR in <a href="https://www.torproject.org/about/overview.html.en">official site</a>. However Tor only works for TCP streams and can be used by any application with SOCKS support.</p>
+
+<p>When we combine Scrapy with Tor, we can have more control over our crawler privacy. We already know that Scrapy can work with proxy server however since Scrapy doesn&rsquo;t work directly with SOCKS proxy, things can work out if we can introduce a http proxy server as an intermediate between Scrapy and Tor which can also speak to Tor using SOCKS. SOCKS protocol is a lower level protocol than http and it is more transparent in a sense that it doesn&rsquo;t add extra info like http-header etc.  We are going to use a tiny and fast proxy server <a href="http://www.pps.univ-paris-diderot.fr/~jch/software/polipo">polipo</a>. Polipo can talk to Tor using SOCKS protocol therefore all three together can work to create anonymous crawler.
+Alright let&rsquo;s get started.</p>
+
+<ul>
+<li>I am going to assume that you have already installed scrapy on your system.</li>
+<li>Install Tor as per the instruction from <a href="https://www.torproject.org/docs/documentation.html.en">official documentation</a>. On my mac I used macport to install Tor.</li>
+<li>Start tor</li>
+<li>Install polipo using macport.</li>
+<li>uncomment following lines in /etc/polipo/config or /opt/local/etc/polipo/config file. <br /></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>build.sbt </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">socksParentProxy</span> <span class="o">=</span> localhost:9050
+</span><span class='line'><span class="nv">diskCacheRoot</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span><span class='line'><span class="nv">disableLocalInterface</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>start polipo.
+By default polipo listens on 8123 port and Tor on 9050 port. If you want you may change this port and accordingly adjust settings in config files.</li>
+</ul>
+
+
+<p>Now to verify if everything is working fine
++ change your broser proxy setting to point to localhost and port 8123.
++ Visit <a href="https://check.torproject.org">this tor check page</a>. This page should give your message that you are using tor correctly depending upon if everything is configured correctly.</p>
+
+<p>Now after basic setup is complete let&rsquo;s add middleware code in Scrapy to make use of this proxy.
++ Add a new file called middlewares.py in your project and add following code.<a href="https://gist.github.com/pkmishra/5193452">See this Gist</a></p>
+
+<figure class='code'><figcaption><span>middlewares.py </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
+</span><span class='line'><span class="kn">import</span> <span class="nn">random</span>
+</span><span class='line'><span class="kn">from</span> <span class="nn">scrapy.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">RandomUserAgentMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">ua</span>  <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;USER_AGENT_LIST&#39;</span><span class="p">))</span>
+</span><span class='line'>        <span class="k">if</span> <span class="n">ua</span><span class="p">:</span>
+</span><span class='line'>            <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;User-Agent&#39;</span><span class="p">,</span> <span class="n">ua</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">ProxyMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+</span><span class='line'>    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
+</span><span class='line'>        <span class="n">request</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s">&#39;proxy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;HTTP_PROXY&#39;</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>In settings.py add the code shown below. <a href="https://gist.github.com/pkmishra/5193452">See this Gist</a></li>
+</ul>
+
+
+<figure class='code'><figcaption><span>settings.py </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">### More comprehensive list can be found at </span>
+</span><span class='line'><span class="c">### http://techpatterns.com/forums/about304.html</span>
+</span><span class='line'><span class="n">USER_AGENT_LIST</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class='line'>    <span class="s">&#39;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 </span>
+</span><span class='line'>         <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">16.0</span><span class="o">.</span><span class="mf">912.36</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">535.7</span><span class="s">&#39;,</span>
+</span><span class='line'>    <span class="s">&#39;Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0) </span>
+</span><span class='line'>       <span class="n">Gecko</span><span class="o">/</span><span class="mf">16.0</span> <span class="n">Firefox</span><span class="o">/</span><span class="mf">16.0</span><span class="s">&#39;,</span>
+</span><span class='line'>    <span class="s">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.55.3 </span>
+</span><span class='line'>       <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Version</span><span class="o">/</span><span class="mf">5.1</span><span class="o">.</span><span class="mi">3</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">534.53</span><span class="o">.</span><span class="mi">10</span><span class="s">&#39;</span>
+</span><span class='line'><span class="p">]</span>
+</span><span class='line'><span class="n">HTTP_PROXY</span> <span class="o">=</span> <span class="s">&#39;http://127.0.0.1:8123&#39;</span>
+</span><span class='line'><span class="n">DOWNLOADER_MIDDLEWARES</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>     <span class="s">&#39;myproject.middlewares.RandomUserAgentMiddleware&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+</span><span class='line'>     <span class="s">&#39;myproject.middlewares.ProxyMiddleware&#39;</span><span class="p">:</span> <span class="mi">410</span><span class="p">,</span>
+</span><span class='line'>     <span class="s">&#39;scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware&#39;</span><span class="p">:</span> <span class="bp">None</span>
+</span><span class='line'>    <span class="c"># Disable compression middleware, so the actual HTML pages are cached</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You are all set to crawl now.
+<b>Make sure you use the crawler responsibly with sufficient delay and follow the website terms and conditions along with robots.txt rules.</b></p>
+
+<p>Next time I am going to setup things on ubuntu and accordingly I will update this article.
+Hope this helps!!!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Scala, SBT and IntellijIdea boilerplate]]></title>
+    <link href="http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/"/>
+    <updated>2013-01-16T23:33:00-05:00</updated>
+    <id>http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate</id>
+    <content type="html"><![CDATA[<p>As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
+1. <a href="" title="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
+2. sbt 0.12.1 installed.</p>
+
+<p>Please note that sbt0.12 doesn&rsquo;t support scala 2.10 therefore this help is for those who wants to set up sbt 0.12 with scala 2.10. <br />
+Alright let the fun begin now&hellip;<br />
++ run following command to download the template project <br />
+<code>g8 pkmishra/scala-sbt-idea-boilerplate.g8</code> <br />
+This will prompt you to give values to variables like project <code>name</code>, <code>organization</code>, <code>version</code> and <code>scalaVersion</code>. You may also select the default values. The template project is located at <a href="https://github.com/pkmishra/scala-sbt-idea-boilerplate.g8">scala-sbt-idea-boilerplate</a> <br />
++ make directory called ~/.sbt/plugins and created file build.sbt if it doesn&rsquo;t exist already. <br/>
++ Write following lines to this build.sbt file so that sbt-idea plugin may be downloaded which is going to be used later&hellip; <br /></p>
+
+<p>
+
+<figure class='code'><figcaption><span>build.sbt </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">sbt._</span>
+</span><span class='line'><span class="k">import</span> <span class="nn">Defaults._</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">resolvers</span> <span class="o">+=</span> <span class="s">&quot;Sonatype snapshots&quot;</span> <span class="n">at</span> <span class="s">&quot;http://oss.sonatype.org/content/repositories/snapshots/&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="n">sbtPluginExtra</span><span class="o">(</span>
+</span><span class='line'>   <span class="n">m</span> <span class="k">=</span> <span class="s">&quot;com.github.mpeltonen&quot;</span> <span class="o">%</span> <span class="s">&quot;sbt-idea&quot;</span> <span class="o">%</span> <span class="s">&quot;1.3.0-SNAPSHOT&quot;</span><span class="o">,</span> <span class="c1">// Plugin module name and version</span>
+</span><span class='line'>   <span class="n">sbtV</span> <span class="k">=</span> <span class="s">&quot;0.12&quot;</span><span class="o">,</span>    <span class="c1">// SBT version</span>
+</span><span class='line'>   <span class="n">scalaV</span> <span class="k">=</span> <span class="s">&quot;2.9.2&quot;</span>    <span class="c1">// Scala version compiled the plugin</span>
+</span><span class='line'><span class="o">)</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+</p>
+
+
+<ul>
+<li>Now go to the root of the project you have generated (e.g. if you have keep it default name should be basic-project) and run following command.<br />
+sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
+This will generate all the idea project files. <br /></li>
+<li>Boom!! now you can open Idea IDE and open the project. To see the output just run command sbt run.</li>
+<li><em>Make sure to run following command everytime you add/remove a new dependency in your project build.sbt file.</em> <br />
+sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
+This will keep everything upto date and you won&rsquo;t get any compilation error in Intellij Idea. Hope this helps!!!</li>
+</ul>
+
+]]></content>
+  </entry>
   
 </feed>
