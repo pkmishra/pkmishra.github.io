@@ -69,7 +69,7 @@
       <li><a href="/blog/archives">All Blogs</a></li>
       
       <li>
-        <a href="/aboutme">
+        <a href="/about-me">
           About Me
         </a>
       </li>
@@ -156,67 +156,12 @@ posted in
 
   <div class="entry-content"><p>As discussed in <a href="" title="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
 
-<ul>
-<li>Add tor repository to your ubuntu repository list (See <a href="" title="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">echo</span> <span class="s2">&quot;deb  http://deb.torproject.org/torproject.org quantal main&quot;</span> | sudo tee -a /etc/apt/sources.list
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>  Here quantal is the release name for Ubuntu 12.10 release. If you are running any other version of ubuntu change it accordingly.
-+ add gpg keys to sign the package</p>
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>gpg --keyserver keys.gnupg.net --recv 886DDD89
-</span><span class='line'>gpg --export A3C4F0F979CAA22CDBA8F512EE8CBC9E886DDD89 | sudo apt-key add -
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Now referesh the package and install tor</li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>apt-get update
-</span><span class='line'>apt-get install deb.torproject.org-keyring
-</span><span class='line'>apt-get install tor
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Install Polipo install using apt-get install polipo and change the configuration as described in last post. Everything else remains same i.e. by default polipo is using 8123 and Tor 9050 so you don&rsquo;t have to modify anything.</li>
-<li>By default Tor and polipo will be installed as service. So after changing configuration you must restart polipo service</li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>using sudo /etc/init.d/polipo restart
-</span><span class='line'><span class="o">(</span>you can use same comand to start/stop both the services<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>Now check whether tor is working fine or not by running</li>
-</ul>
-
-
-<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>curl --proxy http://localhost:8123 https://check.torproject.org/ | grep <span class="s2">&quot;Congratulations. Your browser is configured to use Tor&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You can see you will get this text displayed if everything is working. You are all set now.
-Hope this helps</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -275,119 +220,12 @@ posted in
   <div class="entry-content"><p><a href="http://scrapy.org">Scrapy</a> is a brilliant and well documented crawler written in python. Though it is not as scalable as Apache Nutch but it can easily handle thousands of sites easily. You can get up and running very quickly using the official documentation.
 <a href="https://www.torproject.org/">Tor</a> gives you power to keep your privacy and security.Tor can hide you so that website can not track your identity. You may read more about TOR in <a href="https://www.torproject.org/about/overview.html.en">official site</a>. However Tor only works for TCP streams and can be used by any application with SOCKS support.</p>
 
-<p>When we combine Scrapy with Tor, we can have more control over our crawler privacy. We already know that Scrapy can work with proxy server however since Scrapy doesn&rsquo;t work directly with SOCKS proxy, things can work out if we can introduce a http proxy server as an intermediate between Scrapy and Tor which can also speak to Tor using SOCKS. SOCKS protocol is a lower level protocol than http and it is more transparent in a sense that it doesn&rsquo;t add extra info like http-header etc.  We are going to use a tiny and fast proxy server <a href="http://www.pps.univ-paris-diderot.fr/~jch/software/polipo">polipo</a>. Polipo can talk to Tor using SOCKS protocol therefore all three together can work to create anonymous crawler.
-Alright let&rsquo;s get started.</p>
-
-<ul>
-<li>I am going to assume that you have already installed scrapy on your system.</li>
-<li>Install Tor as per the instruction from <a href="https://www.torproject.org/docs/documentation.html.en">official documentation</a>. On my mac I used macport to install Tor.</li>
-<li>Start tor</li>
-<li>Install polipo using macport.</li>
-<li>uncomment following lines in /etc/polipo/config or /opt/local/etc/polipo/config file. <br /></li>
-</ul>
-
-
-<figure class='code'><figcaption><span>build.sbt </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">socksParentProxy</span> <span class="o">=</span> localhost:9050
-</span><span class='line'><span class="nv">diskCacheRoot</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-</span><span class='line'><span class="nv">disableLocalInterface</span><span class="o">=</span><span class="s2">&quot;&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>start polipo.
-By default polipo listens on 8123 port and Tor on 9050 port. If you want you may change this port and accordingly adjust settings in config files.</li>
-</ul>
-
-
-<p>Now to verify if everything is working fine
-+ change your broser proxy setting to point to localhost and port 8123.
-+ Visit <a href="https://check.torproject.org">this tor check page</a>. This page should give your message that you are using tor correctly depending upon if everything is configured correctly.</p>
-
-<p>Now after basic setup is complete let&rsquo;s add middleware code in Scrapy to make use of this proxy.
-+ Add a new file called middlewares.py in your project and add following code.<a href="https://gist.github.com/pkmishra/5193452">See this Gist</a></p>
-
-<figure class='code'><figcaption><span>middlewares.py </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="kn">import</span> <span class="nn">os</span>
-</span><span class='line'><span class="kn">import</span> <span class="nn">random</span>
-</span><span class='line'><span class="kn">from</span> <span class="nn">scrapy.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-</span><span class='line'><span class="k">class</span> <span class="nc">RandomUserAgentMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">ua</span>  <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;USER_AGENT_LIST&#39;</span><span class="p">))</span>
-</span><span class='line'>        <span class="k">if</span> <span class="n">ua</span><span class="p">:</span>
-</span><span class='line'>            <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s">&#39;User-Agent&#39;</span><span class="p">,</span> <span class="n">ua</span><span class="p">)</span>
-</span><span class='line'>
-</span><span class='line'><span class="k">class</span> <span class="nc">ProxyMiddleware</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-</span><span class='line'>    <span class="k">def</span> <span class="nf">process_request</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">spider</span><span class="p">):</span>
-</span><span class='line'>        <span class="n">request</span><span class="o">.</span><span class="n">meta</span><span class="p">[</span><span class="s">&#39;proxy&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;HTTP_PROXY&#39;</span><span class="p">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<ul>
-<li>In settings.py add the code shown below. <a href="https://gist.github.com/pkmishra/5193452">See this Gist</a></li>
-</ul>
-
-
-<figure class='code'><figcaption><span>settings.py </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-</pre></td><td class='code'><pre><code class='python'><span class='line'><span class="c">### More comprehensive list can be found at </span>
-</span><span class='line'><span class="c">### http://techpatterns.com/forums/about304.html</span>
-</span><span class='line'><span class="n">USER_AGENT_LIST</span> <span class="o">=</span> <span class="p">[</span>
-</span><span class='line'>    <span class="s">&#39;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 </span>
-</span><span class='line'>         <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">16.0</span><span class="o">.</span><span class="mf">912.36</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">535.7</span><span class="s">&#39;,</span>
-</span><span class='line'>    <span class="s">&#39;Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0) </span>
-</span><span class='line'>       <span class="n">Gecko</span><span class="o">/</span><span class="mf">16.0</span> <span class="n">Firefox</span><span class="o">/</span><span class="mf">16.0</span><span class="s">&#39;,</span>
-</span><span class='line'>    <span class="s">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.55.3 </span>
-</span><span class='line'>       <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Version</span><span class="o">/</span><span class="mf">5.1</span><span class="o">.</span><span class="mi">3</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">534.53</span><span class="o">.</span><span class="mi">10</span><span class="s">&#39;</span>
-</span><span class='line'><span class="p">]</span>
-</span><span class='line'><span class="n">HTTP_PROXY</span> <span class="o">=</span> <span class="s">&#39;http://127.0.0.1:8123&#39;</span>
-</span><span class='line'><span class="n">DOWNLOADER_MIDDLEWARES</span> <span class="o">=</span> <span class="p">{</span>
-</span><span class='line'>     <span class="s">&#39;myproject.middlewares.RandomUserAgentMiddleware&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
-</span><span class='line'>     <span class="s">&#39;myproject.middlewares.ProxyMiddleware&#39;</span><span class="p">:</span> <span class="mi">410</span><span class="p">,</span>
-</span><span class='line'>     <span class="s">&#39;scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware&#39;</span><span class="p">:</span> <span class="bp">None</span>
-</span><span class='line'>    <span class="c"># Disable compression middleware, so the actual HTML pages are cached</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>You are all set to crawl now.
-<b>Make sure you use the crawler responsibly with sufficient delay and follow the website terms and conditions along with robots.txt rules.</b></p>
-
-<p>Next time I am going to setup things on ubuntu and accordingly I will update this article.
-Hope this helps!!!</p>
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -447,56 +285,285 @@ posted in
 1. <a href="" title="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
 2. sbt 0.12.1 installed.</p>
 
-<p>Please note that sbt0.12 doesn&rsquo;t support scala 2.10 therefore this help is for those who wants to set up sbt 0.12 with scala 2.10. <br />
-Alright let the fun begin now&hellip;<br />
-+ run following command to download the template project <br />
-<code>g8 pkmishra/scala-sbt-idea-boilerplate.g8</code> <br />
-This will prompt you to give values to variables like project <code>name</code>, <code>organization</code>, <code>version</code> and <code>scalaVersion</code>. You may also select the default values. The template project is located at <a href="https://github.com/pkmishra/scala-sbt-idea-boilerplate.g8">scala-sbt-idea-boilerplate</a> <br />
-+ make directory called ~/.sbt/plugins and created file build.sbt if it doesn&rsquo;t exist already. <br/>
-+ Write following lines to this build.sbt file so that sbt-idea plugin may be downloaded which is going to be used later&hellip; <br /></p>
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/">Read on &rarr;</a>
+    </footer>
+  
 
-<p>
 
-<figure class='code'><figcaption><span>build.sbt </span></figcaption>
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries/">Linq to Sql: Dynamic Sorting Without Using Complete Dynamic Linq Libraries</a></h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Pradeep Kumar Mishra</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-13T23:11:00-04:00" pubdate data-updated="true">Apr 13<span>th</span>, 2008</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/techtips/'>techtips</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>This problem may occur while implementing sorting in GridView. If a storedprocedure is being used either dynamic sql can be created or multiple of case statements can be used. However what if you are just using linq queries. Here are the options</p>
+
+<p>Using Dynamic Linq
+Some work arround so that linq query can be generated at runtime.
+Essentially 2nd approach is the same as that used in 1st one. But if you just want to implement sorting and do not want to digg into Dynamic Linq libraries you can follow the article…</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries/">Read on &rarr;</a>
+    </footer>
+  
+
+
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads/">How to Show Google Mail Like Loading Image/please Wait… Message While Page Data Loads</a></h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Pradeep Kumar Mishra</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-04-13T23:11:00-04:00" pubdate data-updated="true">Apr 13<span>th</span>, 2008</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/techtips/'>techtips</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>For a better user experience you would your users to see please wait message while browser render the page completely. Here is the one solution to the same problem.</p>
+
+<p>Let’s create a master page called Site.master and a web content form as demo.aspx.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads/">Read on &rarr;</a>
+    </footer>
+  
+
+
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/01/solution-ods_DataSource-does-not-support-sorting-with-ienumerable-data/">Solution to Error: The Data Source ‘ods_DataSource’ Does Not Support Sorting With IEnumerable Data</a></h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Pradeep Kumar Mishra</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-01T20:22:00-05:00" pubdate data-updated="true">Mar 1<span>st</span>, 2008</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/techtips/'>techtips</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Suppose you have a grid view and associated datasource as ods_DataSource. The select method is defined as</p>
+
+<figure class='code'><figcaption><span>DemoObject </span></figcaption>
  <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">sbt._</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">Defaults._</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">resolvers</span> <span class="o">+=</span> <span class="s">&quot;Sonatype snapshots&quot;</span> <span class="n">at</span> <span class="s">&quot;http://oss.sonatype.org/content/repositories/snapshots/&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="n">sbtPluginExtra</span><span class="o">(</span>
-</span><span class='line'>   <span class="n">m</span> <span class="k">=</span> <span class="s">&quot;com.github.mpeltonen&quot;</span> <span class="o">%</span> <span class="s">&quot;sbt-idea&quot;</span> <span class="o">%</span> <span class="s">&quot;1.3.0-SNAPSHOT&quot;</span><span class="o">,</span> <span class="c1">// Plugin module name and version</span>
-</span><span class='line'>   <span class="n">sbtV</span> <span class="k">=</span> <span class="s">&quot;0.12&quot;</span><span class="o">,</span>    <span class="c1">// SBT version</span>
-</span><span class='line'>   <span class="n">scalaV</span> <span class="k">=</span> <span class="s">&quot;2.9.2&quot;</span>    <span class="c1">// Scala version compiled the plugin</span>
-</span><span class='line'><span class="o">)</span>
-</span><span class='line'>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="n">ISingleResult</span> <span class="nf">SelectMethod</span><span class="p">(){</span>
+</span><span class='line'><span class="c1">//Get DAL Instance DALInstance</span>
+</span><span class='line'><span class="k">return</span> <span class="n">DALInstance</span><span class="p">.</span><span class="n">GetDATA</span><span class="p">(){}</span>
+</span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
-</p>
 
 
-<ul>
-<li>Now go to the root of the project you have generated (e.g. if you have keep it default name should be basic-project) and run following command.<br />
-sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
-This will generate all the idea project files. <br /></li>
-<li>Boom!! now you can open Idea IDE and open the project. To see the output just run command sbt run.</li>
-<li><em>Make sure to run following command everytime you add/remove a new dependency in your project build.sbt file.</em> <br />
-sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
-This will keep everything upto date and you won&rsquo;t get any compilation error in Intellij Idea. Hope this helps!!!</li>
-</ul>
 
 </div>
   
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/01/solution-ods_DataSource-does-not-support-sorting-with-ienumerable-data/">Read on &rarr;</a>
+    </footer>
+  
+
+
+</div>
+
+      </article>
+    
+    
+      <article class="span4">
+        <div class="article-format">
+
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2008/03/01/how-to-check-if-datareader-has-field/">How to Check if DataReader Has Certain Field</a></h1>
+    
+    
+      <p class="meta">
+        
+  
+
+
+  
+    <span class="byline author vcard">by <span class="fn">Pradeep Kumar Mishra</span></span>
+  
+
+ - 
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2008-03-01T20:22:00-05:00" pubdate data-updated="true">Mar 1<span>st</span>, 2008</time> - 
+        
+
+posted in
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/techtips/'>techtips</a>
+  
+</span>
+
+
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>During development I encountered this problem. So here I am posting a solution for the same.
+Suppose a reader is reading result set which normally returns fields ‘A’ ‘ B’ AND ‘C’ and in some cases it also returns ‘W’.So your dataread method is likeLet’s have some object for the data to persist.</p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2008/03/01/how-to-check-if-datareader-has-field/">Read on &rarr;</a>
+    </footer>
   
 
 
@@ -534,15 +601,36 @@ This will keep everything upto date and you won&rsquo;t get any compilation erro
           <a href="/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/">Scala, SBT and IntellijIdea boilerplate</a>
         </li>
       
+        <li>
+          <a href="/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries/">Linq to Sql: Dynamic Sorting without using Complete Dynamic Linq Libraries</a>
+        </li>
+      
+        <li>
+          <a href="/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads/">How to show google mail like loading image/please wait… message while page data loads</a>
+        </li>
+      
     </ul>
     <h2><a href="/blog/archives">archives</a></h2>
   </div>
   <div class="span6">
     
+<h2>recent public projects</h2>
+<dl id="gh_repos" class="dl-horizontal" data-github-user="pkmishra" data-github-repo-count="0" data-github-skip-forks="true">
+  <dd class="loading">Status updating...</dd>
+</dl>
+<script src="/javascripts/github.js" type="text/javascript"> </script>
+<script src="/javascripts/libs/jXHR.js" type="text/javascript"> </script>
+
 
   </div>
   <div class="span3">
     
+<h2>twitter</h2>
+<a href="https://twitter.com/pkmishra" class="twitter-follow-button" data-show-count="true" data-lang="en">Follow @pkmishra</a>
+<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+<div class="tweet" data-twitter-user="pkmishra">
+</div>
+
 
   </div>
 </div>
@@ -563,11 +651,6 @@ This will keep everything upto date and you won&rsquo;t get any compilation erro
   
   <span>
     Powered by <a href="http://octopress.org/" target="_blank">Octopress</a>.
-  </span>
-  <span>
-    Cover photo
-    by <a href="http://www.flickr.com/photos/69912667@N07/6778147487/"
-    target="_blank">Carrie Nelson</a>.
   </span>
 </p>
 

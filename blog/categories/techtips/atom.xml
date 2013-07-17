@@ -4,7 +4,7 @@
   <title><![CDATA[Category: techtips | Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/blog/categories/techtips/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2013-07-17T00:10:58-04:00</updated>
+  <updated>2013-07-17T14:04:29-04:00</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-04-16T21:22:00-04:00</updated>
     <id>http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu</id>
     <content type="html"><![CDATA[<p>As discussed in <a href="" title="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
+
+<!-- more -->
+
 
 <ul>
 <li>Add tor repository to your ubuntu repository list (See <a href="" title="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
@@ -84,6 +87,9 @@ Hope this helps</p>
     <id>http://pkmishra.github.io/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac</id>
     <content type="html"><![CDATA[<p><a href="http://scrapy.org">Scrapy</a> is a brilliant and well documented crawler written in python. Though it is not as scalable as Apache Nutch but it can easily handle thousands of sites easily. You can get up and running very quickly using the official documentation.
 <a href="https://www.torproject.org/">Tor</a> gives you power to keep your privacy and security.Tor can hide you so that website can not track your identity. You may read more about TOR in <a href="https://www.torproject.org/about/overview.html.en">official site</a>. However Tor only works for TCP streams and can be used by any application with SOCKS support.</p>
+
+<!-- more -->
+
 
 <p>When we combine Scrapy with Tor, we can have more control over our crawler privacy. We already know that Scrapy can work with proxy server however since Scrapy doesn&rsquo;t work directly with SOCKS proxy, things can work out if we can introduce a http proxy server as an intermediate between Scrapy and Tor which can also speak to Tor using SOCKS. SOCKS protocol is a lower level protocol than http and it is more transparent in a sense that it doesn&rsquo;t add extra info like http-header etc.  We are going to use a tiny and fast proxy server <a href="http://www.pps.univ-paris-diderot.fr/~jch/software/polipo">polipo</a>. Polipo can talk to Tor using SOCKS protocol therefore all three together can work to create anonymous crawler.
 Alright let&rsquo;s get started.</p>
@@ -203,6 +209,441 @@ By default polipo listens on 8123 port and Tor on 9050 port. If you want you may
 
 <p>Next time I am going to setup things on ubuntu and accordingly I will update this article.
 Hope this helps!!!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linq to Sql: Dynamic Sorting without using Complete Dynamic Linq Libraries]]></title>
+    <link href="http://pkmishra.github.io/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries/"/>
+    <updated>2008-04-13T23:11:00-04:00</updated>
+    <id>http://pkmishra.github.io/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries</id>
+    <content type="html"><![CDATA[<p>This problem may occur while implementing sorting in GridView. If a storedprocedure is being used either dynamic sql can be created or multiple of case statements can be used. However what if you are just using linq queries. Here are the options</p>
+
+<p>Using Dynamic Linq
+Some work arround so that linq query can be generated at runtime.
+Essentially 2nd approach is the same as that used in 1st one. But if you just want to implement sorting and do not want to digg into Dynamic Linq libraries you can follow the article…</p>
+
+<!-- more -->
+
+
+<p>Let’s assume following method expects sortExpression parameter directly passed by UI layer GridView.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="n">DataTable</span> <span class="nf">GetSomeData</span><span class="p">(</span><span class="n">par1</span><span class="p">,</span> <span class="n">par2</span><span class="err">…</span><span class="p">.,</span> <span class="kt">string</span> <span class="n">sortExpression</span><span class="p">)</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="p">(</span><span class="c1">//Linq query goes here )</span>
+</span><span class='line'><span class="c1">// We want something like this which is not possible as of now</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="p">(</span><span class="n">some</span> <span class="n">query</span><span class="p">)</span> <span class="p">(</span><span class="n">OrderBy</span> <span class="n">SortExpression</span><span class="p">)</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span><span class='line'><span class="n">Here</span> <span class="k">is</span> <span class="n">the</span> <span class="n">extension</span> <span class="n">method</span> <span class="n">you</span> <span class="n">would</span> <span class="n">like</span> <span class="n">to</span> <span class="n">follow</span><span class="err">…</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">public</span> <span class="n">DataTable</span> <span class="n">GetSomeData</span><span class="p">(</span><span class="n">par1</span><span class="p">,</span> <span class="n">par2</span><span class="err">…</span><span class="p">.,</span> <span class="kt">string</span> <span class="n">sortExpression</span><span class="p">)</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="p">(</span><span class="c1">//Linq query goes here )</span>
+</span><span class='line'><span class="c1">// We want something like this which is not possible as of now</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="p">(</span><span class="n">some</span> <span class="n">query</span><span class="p">)</span> <span class="p">(</span><span class="n">OrderBy</span> <span class="n">SortExpression</span><span class="p">)</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">Util</span>
+</span><span class='line'><span class="p">{&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">pre</span><span class="p">&gt;&lt;</span><span class="n">code</span><span class="p">&gt;</span><span class="c1">//Thanks to Ernesto for pointing out a small correction in method signature.</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">IQueryable</span> <span class="nf">OrderBy</span><span class="p">(</span><span class="k">this</span> <span class="n">IQueryable</span> <span class="n">source</span><span class="p">,</span> <span class="kt">string</span> <span class="n">sortExpression</span><span class="p">)</span> <span class="k">where</span> <span class="n">TEntity</span> <span class="p">:</span> <span class="k">class</span>
+</span><span class='line'><span class="err">{</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">type</span> <span class="p">=</span> <span class="k">typeof</span><span class="p">(</span><span class="n">TEntity</span><span class="p">);</span>
+</span><span class='line'><span class="c1">// Remember that for ascending order GridView just returns the column name and for descending it returns column name followed by DESC keyword</span>
+</span><span class='line'><span class="c1">// Therefore we need to examine the sortExpression and separate out Column Name and order (ASC/DESC)</span>
+</span><span class='line'><span class="kt">string</span><span class="p">[]</span> <span class="n">expressionParts</span> <span class="p">=</span> <span class="n">sortExpression</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="err">‘</span> <span class="err">‘</span><span class="p">);</span> <span class="c1">// Assuming sortExpression is like [ColoumnName DESC] or [ColumnName]</span>
+</span><span class='line'><span class="kt">string</span> <span class="n">orderByProperty</span> <span class="p">=</span> <span class="n">expressionParts</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+</span><span class='line'><span class="kt">string</span> <span class="n">sortDirection</span> <span class="p">=</span> <span class="err">“</span><span class="n">ASC</span><span class="err">”</span><span class="p">;</span>
+</span><span class='line'><span class="kt">string</span> <span class="n">methodName</span> <span class="p">=</span> <span class="err">“</span><span class="n">OrderBy</span><span class="err">”</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">//if sortDirection is descending</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">expressionParts</span><span class="p">.</span><span class="n">Length</span> <span class="p">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="m">1</span> <span class="p">&amp;</span><span class="n">amp</span><span class="p">;&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">expressionParts</span><span class="p">[</span><span class="m">1</span><span class="p">]</span> <span class="p">==</span> <span class="err">“</span><span class="n">DESC</span><span class="err">”</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'>    <span class="n">sortDirection</span> <span class="p">=</span> <span class="err">“</span><span class="n">Descending</span><span class="err">”</span><span class="p">;</span>
+</span><span class='line'>    <span class="n">methodName</span> <span class="p">+=</span> <span class="n">sortDirection</span><span class="p">;</span> <span class="c1">// Add sort direction at the end of Method name</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">property</span> <span class="p">=</span> <span class="n">type</span><span class="p">.</span><span class="n">GetProperty</span><span class="p">(</span><span class="n">orderByProperty</span><span class="p">);</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">parameter</span> <span class="p">=</span> <span class="n">Expression</span><span class="p">.</span><span class="n">Parameter</span><span class="p">(</span><span class="n">type</span><span class="p">,</span> <span class="err">“</span><span class="n">p</span><span class="err">”</span><span class="p">);</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">propertyAccess</span> <span class="p">=</span> <span class="n">Expression</span><span class="p">.</span><span class="n">MakeMemberAccess</span><span class="p">(</span><span class="n">parameter</span><span class="p">,</span> <span class="n">property</span><span class="p">);</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">orderByExp</span> <span class="p">=</span> <span class="n">Expression</span><span class="p">.</span><span class="n">Lambda</span><span class="p">(</span><span class="n">propertyAccess</span><span class="p">,</span> <span class="n">parameter</span><span class="p">);</span>
+</span><span class='line'><span class="n">MethodCallExpression</span> <span class="n">resultExp</span> <span class="p">=</span> <span class="n">Expression</span><span class="p">.</span><span class="n">Call</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="n">Queryable</span><span class="p">),</span> <span class="n">methodName</span><span class="p">,</span>
+</span><span class='line'><span class="k">new</span> <span class="n">Type</span><span class="p">[]</span> <span class="p">{</span> <span class="n">type</span><span class="p">,</span> <span class="n">property</span><span class="p">.</span><span class="n">PropertyType</span> <span class="p">},</span>
+</span><span class='line'><span class="n">source</span><span class="p">.</span><span class="n">Expression</span><span class="p">,</span> <span class="n">Expression</span><span class="p">.</span><span class="n">Quote</span><span class="p">(</span><span class="n">orderByExp</span><span class="p">));</span>
+</span><span class='line'><span class="k">return</span> <span class="n">source</span><span class="p">.</span><span class="n">Provider</span><span class="p">.</span><span class="n">CreateQuery</span><span class="p">(</span><span class="n">resultExp</span><span class="p">);</span>
+</span><span class='line'><span class="p">&lt;/</span><span class="n">code</span><span class="p">&gt;&lt;/</span><span class="n">pre</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;}</span>
+</span><span class='line'><span class="p">}&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="c1">//Usage will be as of follows…&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">public</span> <span class="n">DataTable</span> <span class="n">GetSomeData</span><span class="p">(</span><span class="n">par1</span><span class="p">,</span> <span class="n">par2</span><span class="err">…</span><span class="p">.,</span> <span class="kt">string</span> <span class="n">sortExpression</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="p">(</span><span class="c1">//Linq query goes here )</span>
+</span><span class='line'><span class="c1">// We want something like this which is not possible as of now</span>
+</span><span class='line'><span class="kt">var</span> <span class="n">query</span> <span class="p">=</span> <span class="p">(</span><span class="n">some</span> <span class="n">query</span><span class="p">)</span>
+</span><span class='line'><span class="k">return</span> <span class="n">query</span><span class="p">.</span><span class="n">OrderBy</span><span class="p">(</span><span class="n">SortExpression</span><span class="p">).</span><span class="n">ToDataTable</span><span class="p">(</span><span class="n">rec</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="kt">object</span><span class="p">[]</span> <span class="p">{</span> <span class="n">query</span><span class="p">}));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Again OrderBy is an extension method. Hope this helps!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to show google mail like loading image/please wait… message while page data loads]]></title>
+    <link href="http://pkmishra.github.io/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads/"/>
+    <updated>2008-04-13T23:11:00-04:00</updated>
+    <id>http://pkmishra.github.io/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads</id>
+    <content type="html"><![CDATA[<p>For a better user experience you would your users to see please wait message while browser render the page completely. Here is the one solution to the same problem.</p>
+
+<p>Let’s create a master page called Site.master and a web content form as demo.aspx.</p>
+
+<!-- more -->
+
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DemoObject </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;title&gt;</span>Loading Demo<span class="nt">&lt;/title&gt;&lt;/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;pre&gt;&lt;code&gt;</span><span class="ni">&amp;lt;</span>form<span class="ni">&amp;gt;</span>
+</span><span class='line'><span class="nt">&lt;/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- Page Header will go here... --&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>                                            <span class="c">&lt;!-- Page-specific content will go here... --&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;div&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c">&lt;!-- Page Footer will go here... --&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;/div&gt;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;p&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>Demo.aspx is the web content form which fetches data from a database.
+To show loading message add following code to the code behind of master file Site.master.cs</p>
+
+<p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnLoad</span><span class="p">(</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(!</span><span class="n">IsPostBack</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>  <span class="n">Response</span><span class="p">.</span><span class="n">Buffer</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+</span><span class='line'>  <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">”</span> <span class="n">Please</span> <span class="n">wait</span><span class="err">…“</span><span class="p">);</span>
+</span><span class='line'>  <span class="n">Response</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">base</span><span class="p">.</span><span class="n">OnLoad</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Render</span><span class="p">(</span><span class="n">HtmlTextWriter</span> <span class="n">writer</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>  <span class="k">if</span> <span class="p">(!</span><span class="n">IsPostBack</span><span class="p">)</span>
+</span><span class='line'>  <span class="p">{</span>
+</span><span class='line'>  <span class="n">Response</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+</span><span class='line'>  <span class="n">Response</span><span class="p">.</span><span class="n">ClearContent</span><span class="p">();</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="k">base</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">writer</span><span class="p">);</span>
+</span><span class='line'>  <span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>in the Site.master.aspx file add following javascript at the end of the file.
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'> <span class="k">try</span><span class="p">{</span>
+</span><span class='line'> <span class="kd">var</span> <span class="nx">divLoadingMessage</span> <span class="o">=</span>  <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">ldquo</span><span class="p">;</span><span class="nx">divLoadingMsg</span><span class="o">&amp;</span><span class="nx">rdquo</span><span class="p">;)</span>
+</span><span class='line'> <span class="k">if</span> <span class="p">(</span><span class="nx">divLoadingMessage</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="nx">amp</span><span class="p">;</span> <span class="k">typeof</span><span class="p">(</span><span class="nx">divLoadingMessage</span><span class="p">)</span> <span class="o">!=</span> <span class="o">&amp;</span><span class="nx">lsquo</span><span class="p">;</span><span class="kc">undefined</span><span class="o">&amp;</span><span class="nx">rsquo</span><span class="p">;)</span><span class="o">&lt;</span><span class="err">/p&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">pre</span><span class="o">&gt;&lt;</span><span class="nx">code</span><span class="o">&gt;</span>    <span class="p">{</span>
+</span><span class='line'>        <span class="nx">divLoadingMessage</span><span class="p">.</span><span class="nx">style</span><span class="p">.</span><span class="nx">display</span><span class="o">=</span><span class="s2">&quot;none&quot;</span><span class="p">;</span>
+</span><span class='line'>        <span class="nx">divLoadingMessage</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">removeChild</span><span class="p">(</span><span class="nx">divLoadingMessage</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span><span class="k">catch</span><span class="p">(</span><span class="nx">e</span><span class="p">){}</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/code&gt;&lt;/pre&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="nx">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<p>That’s it now all your pages using Site.master will be showing Please wait.. message when the page starts loading. Of course instead of putting a message you can put a nice web2.0 loading image in between divLoadingMsg tags.
+So how does it work?
+The onLoad event of master page will be called before any of the content web form’s Onload event. as soon as master page loads div tag becomes visible. After the page has loaded completely the script written at the end of the master page hides the div tag. so simple isnt’t it.Hope this helps!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Solution to Error: The data source ‘ods_DataSource’ does not support sorting with IEnumerable data]]></title>
+    <link href="http://pkmishra.github.io/blog/2008/03/01/solution-ods_DataSource-does-not-support-sorting-with-ienumerable-data/"/>
+    <updated>2008-03-01T20:22:00-05:00</updated>
+    <id>http://pkmishra.github.io/blog/2008/03/01/solution-ods_DataSource-does-not-support-sorting-with-ienumerable-data</id>
+    <content type="html"><![CDATA[<p>Suppose you have a grid view and associated datasource as ods_DataSource. The select method is defined as
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>DemoObject </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="n">ISingleResult</span> <span class="nf">SelectMethod</span><span class="p">(){</span>
+</span><span class='line'><span class="c1">//Get DAL Instance DALInstance</span>
+</span><span class='line'><span class="k">return</span> <span class="n">DALInstance</span><span class="p">.</span><span class="n">GetDATA</span><span class="p">(){}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div></p>
+
+<!-- more -->
+
+
+<p>Now if you try to sort on some column the following error pops up.The data source ‘ods_DataSource’ does not support sorting with IEnumerable data. Automatic sorting is only supported with DataView, DataTable, and DataSet.This is because to implement sorting you must have datasource of type DataView/DataTable/DataSet. Now if you are using traditional 3 tier architecture and returning one of these three datatypes everything works fine. The problem arises when you are using Linq. There are two possible solution for this..</p>
+
+<ul>
+<li>Implement custom sorting.</li>
+<li>Change IEnumerable datatype into one of these datatypes.</li>
+</ul>
+
+
+<p>Here we will try to follow 2nd approach. In our data access layer we will change IEnumerable into a DataTable using an static utility class. Here is the code to perform that operation
+<div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+</pre></td><td class='code'><pre><code class='csharp'><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="k">class</span> <span class="nc">Util</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="k">public</span> <span class="k">static</span> <span class="n">DataTable</span> <span class="nf">ToDataTable</span><span class="p">(</span><span class="k">this</span> <span class="n">IEnumerable</span> <span class="n">varlist</span><span class="p">,</span> <span class="n">CreateRowDelegate</span> <span class="n">fn</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">DataTable</span> <span class="n">dtReturn</span> <span class="p">=</span> <span class="k">new</span> <span class="n">DataTable</span><span class="p">();</span>
+</span><span class='line'><span class="c1">// column names</span>
+</span><span class='line'><span class="n">PropertyInfo</span><span class="p">[]</span> <span class="n">oProps</span> <span class="p">=</span> <span class="k">null</span><span class="p">;</span>
+</span><span class='line'><span class="c1">// Could add a check to verify that there is an element 0</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="n">T</span> <span class="n">rec</span> <span class="k">in</span> <span class="n">varlist</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">// Use reflection to get property names, to create table, Only first time, others will follow</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span><span class="n">oProps</span> <span class="p">==</span> <span class="k">null</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">oProps</span> <span class="p">=</span> <span class="p">((</span><span class="n">Type</span><span class="p">)</span><span class="n">rec</span><span class="p">.</span><span class="n">GetType</span><span class="p">()).</span><span class="n">GetProperties</span><span class="p">();</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="n">PropertyInfo</span> <span class="n">pi</span> <span class="k">in</span> <span class="n">oProps</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">// Note that we must check a nullable type else method will throw and error</span>
+</span><span class='line'><span class="n">Type</span> <span class="n">colType</span> <span class="p">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">PropertyType</span><span class="p">;</span> <span class="k">if</span> <span class="p">((</span><span class="n">colType</span><span class="p">.</span><span class="n">IsGenericType</span><span class="p">)</span> <span class="p">&amp;</span><span class="n">amp</span><span class="p">;&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="p">(</span><span class="n">colType</span><span class="p">.</span><span class="n">GetGenericTypeDefinition</span><span class="p">()</span> <span class="p">==</span> <span class="k">typeof</span><span class="p">(</span><span class="n">Nullable</span><span class="p">)))</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">// Since all the elements have same type you can just take the first element and get type</span>
+</span><span class='line'><span class="n">colType</span> <span class="p">=</span> <span class="n">colType</span><span class="p">.</span><span class="n">GetGenericArguments</span><span class="p">()[</span><span class="m">0</span><span class="p">];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">dtReturn</span><span class="p">.</span><span class="n">Columns</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="k">new</span> <span class="n">DataColumn</span><span class="p">(</span><span class="n">pi</span><span class="p">.</span><span class="n">Name</span><span class="p">,</span> <span class="n">colType</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">DataRow</span> <span class="n">dr</span> <span class="p">=</span> <span class="n">dtReturn</span><span class="p">.</span><span class="n">NewRow</span><span class="p">();</span>
+</span><span class='line'><span class="c1">//Iterate through each property in PropertyInfo</span>
+</span><span class='line'><span class="k">foreach</span> <span class="p">(</span><span class="n">PropertyInfo</span> <span class="n">pi</span> <span class="k">in</span> <span class="n">oProps</span><span class="p">)</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="c1">// Handle null values accordingly</span>
+</span><span class='line'><span class="n">dr</span><span class="p">[</span><span class="n">pi</span><span class="p">.</span><span class="n">Name</span><span class="p">]</span> <span class="p">=</span> <span class="n">pi</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="k">null</span><span class="p">)</span> <span class="p">==</span> <span class="k">null</span> <span class="p">?</span> <span class="n">DBNull</span><span class="p">.</span><span class="n">Value</span> <span class="p">:</span> <span class="n">pi</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">dtReturn</span><span class="p">.</span><span class="n">Rows</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">dr</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">return</span> <span class="p">(</span><span class="n">dtReturn</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="k">delegate</span> <span class="kt">object</span><span class="p">[]</span> <span class="nf">CreateRowDelegate</span><span class="p">(</span><span class="n">T</span> <span class="n">t</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="n">Changes</span> <span class="k">in</span> <span class="n">the</span> <span class="n">Select</span> <span class="n">method</span><span class="p">&lt;/</span><span class="n">p</span><span class="p">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">&lt;</span><span class="n">p</span><span class="p">&gt;</span><span class="k">public</span> <span class="n">ISingleResult</span> <span class="n">SelectMethod</span><span class="p">(){</span>
+</span><span class='line'><span class="c1">//Get DAL Instance DALInstance</span>
+</span><span class='line'><span class="k">return</span> <span class="n">DALInstance</span><span class="p">.</span><span class="n">GetSomeData</span><span class="p">(){}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="k">public</span> <span class="n">DataTable</span> <span class="nf">GetSomeData</span><span class="p">()</span>
+</span><span class='line'><span class="p">{</span>
+</span><span class='line'><span class="n">ISingle</span> <span class="n">result</span> <span class="p">=</span> <span class="c1">//code to get result;</span>
+</span><span class='line'><span class="k">return</span> <span class="p">(</span><span class="n">result</span><span class="p">.</span><span class="n">ToDataTable</span><span class="p">(</span><span class="n">rec</span> <span class="p">=&gt;</span> <span class="k">new</span> <span class="kt">object</span><span class="p">[]</span> <span class="p">{</span> <span class="n">result</span><span class="p">}));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+As you can see ToDataTable is an extenstion method and will be available to all IEnumerable types.Obviously there are some performance overhead due to use of reflection but still this approach can be used. However for real time applications performance testing must be performed.</p>
+
+<p>Hope this helps!</p>
 ]]></content>
   </entry>
   

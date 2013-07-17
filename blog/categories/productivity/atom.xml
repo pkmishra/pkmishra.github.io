@@ -4,7 +4,7 @@
   <title><![CDATA[Category: productivity | Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/blog/categories/productivity/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2013-07-17T00:10:58-04:00</updated>
+  <updated>2013-07-17T14:04:29-04:00</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
 1. <a href="" title="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
 2. sbt 0.12.1 installed.</p>
+
+<!-- more -->
+
 
 <p>Please note that sbt0.12 doesn&rsquo;t support scala 2.10 therefore this help is for those who wants to set up sbt 0.12 with scala 2.10. <br />
 Alright let the fun begin now&hellip;<br />
