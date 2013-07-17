@@ -64,18 +64,18 @@ default_asides: [asides/recent_posts.html, asides/github.html, asides/delicious.
 
 #reyand theme settings
 navigation_elements: [
-  {name: "About Me", link: "/aboutme"},
+  {name: "About Me", link: "/about-me"},
     {name: "Code", link: "https://github.com/pkmishra"}]
 
 
 # Github repositories
-github_user:
+github_user: pkmishra
 github_repo_count: 0
 github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: pkmishra
 twitter_tweet_button: true
 
 # Google +1

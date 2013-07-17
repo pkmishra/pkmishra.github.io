@@ -7,7 +7,7 @@ categories: techtips
 ---
 [Scrapy](http://scrapy.org) is a brilliant and well documented crawler written in python. Though it is not as scalable as Apache Nutch but it can easily handle thousands of sites easily. You can get up and running very quickly using the official documentation.
 [Tor](https://www.torproject.org/) gives you power to keep your privacy and security.Tor can hide you so that website can not track your identity. You may read more about TOR in [official site](https://www.torproject.org/about/overview.html.en). However Tor only works for TCP streams and can be used by any application with SOCKS support.
-
+<!-- more -->
 When we combine Scrapy with Tor, we can have more control over our crawler privacy. We already know that Scrapy can work with proxy server however since Scrapy doesn't work directly with SOCKS proxy, things can work out if we can introduce a http proxy server as an intermediate between Scrapy and Tor which can also speak to Tor using SOCKS. SOCKS protocol is a lower level protocol than http and it is more transparent in a sense that it doesn't add extra info like http-header etc.  We are going to use a tiny and fast proxy server [polipo](http://www.pps.univ-paris-diderot.fr/~jch/software/polipo). Polipo can talk to Tor using SOCKS protocol therefore all three together can work to create anonymous crawler. 
 Alright let's get started. 
 

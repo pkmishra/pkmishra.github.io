@@ -7,7 +7,7 @@ categories: techtips
 ---
 As discussed in [last post]("http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/") this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor
 
-
+<!-- more -->
 + Add tor repository to your ubuntu repository list (See [official documentation]("https://www.torproject.org/docs/debian.html.en#ubuntu") for more detail)
 
 {% codeblock lang:sh %}
