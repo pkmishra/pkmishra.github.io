@@ -4,7 +4,7 @@
   <title><![CDATA[Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2013-07-17T14:21:46-04:00</updated>
+  <updated>2013-10-01T19:11:07+05:30</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Scrapy: run using TOR and multiple agents Part 2]]></title>
     <link href="http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu/"/>
-    <updated>2013-04-16T21:22:00-04:00</updated>
+    <updated>2013-04-16T21:22:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu</id>
     <content type="html"><![CDATA[<p>As discussed in <a href="" title="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
 
@@ -88,7 +88,7 @@ Hope this helps</p>
   <entry>
     <title type="html"><![CDATA[Scrapy: run using TOR and multiple agents]]></title>
     <link href="http://pkmishra.github.io/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac/"/>
-    <updated>2013-03-18T20:02:00-04:00</updated>
+    <updated>2013-03-18T20:02:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac</id>
     <content type="html"><![CDATA[<p><a href="http://scrapy.org">Scrapy</a> is a brilliant and well documented crawler written in python. Though it is not as scalable as Apache Nutch but it can easily handle thousands of sites easily. You can get up and running very quickly using the official documentation.
 <a href="https://www.torproject.org/">Tor</a> gives you power to keep your privacy and security.Tor can hide you so that website can not track your identity. You may read more about TOR in <a href="https://www.torproject.org/about/overview.html.en">official site</a>. However Tor only works for TCP streams and can be used by any application with SOCKS support.</p>
@@ -213,7 +213,7 @@ Hope this helps!!!</p>
   <entry>
     <title type="html"><![CDATA[Scala, SBT and IntellijIdea boilerplate]]></title>
     <link href="http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/"/>
-    <updated>2013-01-16T23:33:00-05:00</updated>
+    <updated>2013-01-16T23:33:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate</id>
     <content type="html"><![CDATA[<p>As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
 1. <a href="" title="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
@@ -276,7 +276,7 @@ This will keep everything upto date and you won&rsquo;t get any compilation erro
   <entry>
     <title type="html"><![CDATA[Linq to Sql: Dynamic Sorting without using Complete Dynamic Linq Libraries]]></title>
     <link href="http://pkmishra.github.io/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries/"/>
-    <updated>2008-04-13T23:11:00-04:00</updated>
+    <updated>2008-04-13T23:11:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries</id>
     <content type="html"><![CDATA[<p>This problem may occur while implementing sorting in GridView. If a storedprocedure is being used either dynamic sql can be created or multiple of case statements can be used. However what if you are just using linq queries. Here are the options</p>
 
@@ -405,7 +405,7 @@ Essentially 2nd approach is the same as that used in 1st one. But if you just wa
   <entry>
     <title type="html"><![CDATA[How to show google mail like loading image/please wait… message while page data loads]]></title>
     <link href="http://pkmishra.github.io/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads/"/>
-    <updated>2008-04-13T23:11:00-04:00</updated>
+    <updated>2008-04-13T23:11:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2008/04/13/how-to-show-google-mail-like-loading-image-please-wait-message-while-page-data-loads</id>
     <content type="html"><![CDATA[<p>For a better user experience you would your users to see please wait message while browser render the page completely. Here is the one solution to the same problem.</p>
 
@@ -538,7 +538,7 @@ The onLoad event of master page will be called before any of the content web for
   <entry>
     <title type="html"><![CDATA[Solution to Error: The data source ‘ods_DataSource’ does not support sorting with IEnumerable data]]></title>
     <link href="http://pkmishra.github.io/blog/2008/03/01/solution-ods_DataSource-does-not-support-sorting-with-ienumerable-data/"/>
-    <updated>2008-03-01T20:22:00-05:00</updated>
+    <updated>2008-03-01T20:22:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2008/03/01/solution-ods_DataSource-does-not-support-sorting-with-ienumerable-data</id>
     <content type="html"><![CDATA[<p>Suppose you have a grid view and associated datasource as ods_DataSource. The select method is defined as</p>
 
@@ -679,7 +679,7 @@ The onLoad event of master page will be called before any of the content web for
   <entry>
     <title type="html"><![CDATA[How To Check if DataReader has certain field]]></title>
     <link href="http://pkmishra.github.io/blog/2008/03/01/how-to-check-if-datareader-has-field/"/>
-    <updated>2008-03-01T20:22:00-05:00</updated>
+    <updated>2008-03-01T20:22:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2008/03/01/how-to-check-if-datareader-has-field</id>
     <content type="html"><![CDATA[<p>During development I encountered this problem. So here I am posting a solution for the same.
 Suppose a reader is reading result set which normally returns fields ‘A’ ‘ B’ AND ‘C’ and in some cases it also returns ‘W’.So your dataread method is likeLet’s have some object for the data to persist.</p>
