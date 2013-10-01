@@ -1,0 +1,18 @@
+<div class="highlight"><pre><span class="c">### More comprehensive list can be found at </span>
+<span class="c">### http://techpatterns.com/forums/about304.html</span>
+<span class="n">USER_AGENT_LIST</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s">&#39;Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/535.7 </span>
+         <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Chrome</span><span class="o">/</span><span class="mf">16.0</span><span class="o">.</span><span class="mf">912.36</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">535.7</span><span class="s">&#39;,</span>
+    <span class="s">&#39;Mozilla/5.0 (Windows NT 6.2; Win64; x64; rv:16.0) </span>
+       <span class="n">Gecko</span><span class="o">/</span><span class="mf">16.0</span> <span class="n">Firefox</span><span class="o">/</span><span class="mf">16.0</span><span class="s">&#39;,</span>
+    <span class="s">&#39;Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_3) AppleWebKit/534.55.3 </span>
+       <span class="p">(</span><span class="n">KHTML</span><span class="p">,</span> <span class="n">like</span> <span class="n">Gecko</span><span class="p">)</span> <span class="n">Version</span><span class="o">/</span><span class="mf">5.1</span><span class="o">.</span><span class="mi">3</span> <span class="n">Safari</span><span class="o">/</span><span class="mf">534.53</span><span class="o">.</span><span class="mi">10</span><span class="s">&#39;</span>
+<span class="p">]</span>
+<span class="n">HTTP_PROXY</span> <span class="o">=</span> <span class="s">&#39;http://127.0.0.1:8123&#39;</span>
+<span class="n">DOWNLOADER_MIDDLEWARES</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="s">&#39;myproject.middlewares.RandomUserAgentMiddleware&#39;</span><span class="p">:</span> <span class="mi">400</span><span class="p">,</span>
+     <span class="s">&#39;myproject.middlewares.ProxyMiddleware&#39;</span><span class="p">:</span> <span class="mi">410</span><span class="p">,</span>
+     <span class="s">&#39;scrapy.contrib.downloadermiddleware.useragent.UserAgentMiddleware&#39;</span><span class="p">:</span> <span class="bp">None</span>
+    <span class="c"># Disable compression middleware, so the actual HTML pages are cached</span>
+<span class="p">}</span>
+</pre></div>

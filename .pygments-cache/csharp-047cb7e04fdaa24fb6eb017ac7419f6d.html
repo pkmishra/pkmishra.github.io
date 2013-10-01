@@ -1,0 +1,33 @@
+<div class="highlight"><pre><span class="c1">//Create a method which verifies if a column exists in a particular row being read by datareader</span>
+
+<span class="k">private</span> <span class="kt">bool</span> <span class="nf">ColumnExists</span><span class="p">(</span><span class="n">SqlDataReader</span> <span class="n">reader</span><span class="p">,</span> <span class="kt">string</span> <span class="n">columnName</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="n">reader</span><span class="p">.</span><span class="n">GetSchemaTable</span><span class="p">().</span><span class="n">DefaultView</span><span class="p">.</span><span class="n">RowFilter</span> <span class="p">=</span> <span class="err">“</span><span class="n">ColumnName</span><span class="p">=</span> <span class="err">‘”</span> <span class="p">+</span> <span class="n">columnName</span> <span class="p">+</span> <span class="err">“‘”</span><span class="p">;</span>
+<span class="k">return</span> <span class="p">(</span><span class="n">reader</span><span class="p">.</span><span class="n">GetSchemaTable</span><span class="p">().</span><span class="n">DefaultView</span><span class="p">.</span><span class="n">Count</span> <span class="p">&gt;</span> <span class="m">0</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">So</span> <span class="n">now</span> <span class="n">ReadData</span> <span class="n">method</span> <span class="n">will</span> <span class="n">look</span> <span class="n">like</span>
+
+<span class="k">private</span> <span class="n">Object</span> <span class="nf">DataRead</span><span class="p">(</span><span class="n">SqlDataReader</span> <span class="n">reader</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="c1">//Some Code</span>
+<span class="c1">//</span>
+
+<span class="k">if</span><span class="p">(</span><span class="n">reader</span><span class="p">[</span><span class="s">&quot;A&quot;</span><span class="p">]!=</span><span class="k">null</span><span class="p">)</span>
+<span class="kt">string</span> <span class="n">a</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="err">“</span><span class="n">A</span><span class="err">”</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">reader</span><span class="p">[</span><span class="s">&quot;A&quot;</span><span class="p">]!=</span><span class="k">null</span><span class="p">)</span>
+<span class="kt">string</span> <span class="n">b</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="err">“</span><span class="n">B</span><span class="err">”</span><span class="p">);</span>
+<span class="k">if</span><span class="p">(</span><span class="n">reader</span><span class="p">[</span><span class="s">&quot;A&quot;</span><span class="p">]!=</span><span class="k">null</span><span class="p">)</span>
+<span class="kt">string</span> <span class="n">c</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="err">“</span><span class="n">C</span><span class="err">”</span><span class="p">);</span>
+<span class="c1">//Check only those columns where you have doubts</span>
+<span class="k">if</span><span class="p">(</span><span class="n">ColumnExists</span><span class="p">(</span><span class="n">reader</span><span class="p">,</span> <span class="err">“</span><span class="n">W</span><span class="err">”</span><span class="p">))</span>
+<span class="p">{</span>
+<span class="k">if</span><span class="p">(</span> <span class="n">reader</span><span class="p">[</span><span class="s">&quot;W&quot;</span><span class="p">]!=</span><span class="k">null</span><span class="p">)</span>
+<span class="kt">string</span> <span class="n">w</span> <span class="p">=</span> <span class="n">reader</span><span class="p">.</span><span class="n">GetString</span><span class="p">(</span><span class="err">“</span><span class="n">W</span><span class="err">”</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="c1">//Some Code</span>
+<span class="c1">//……</span>
+
+<span class="n">returns</span> <span class="k">new</span> <span class="nf">DemoObject</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">w</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>

@@ -1,0 +1,20 @@
+<div class="highlight"><pre><span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">OnLoad</span><span class="p">(</span><span class="n">EventArgs</span> <span class="n">e</span><span class="p">)</span>
+  <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(!</span><span class="n">IsPostBack</span><span class="p">)</span>
+  <span class="p">{</span>
+  <span class="n">Response</span><span class="p">.</span><span class="n">Buffer</span> <span class="p">=</span> <span class="k">false</span><span class="p">;</span>
+  <span class="n">Response</span><span class="p">.</span><span class="n">Write</span><span class="p">(</span><span class="err">”</span> <span class="n">Please</span> <span class="n">wait</span><span class="err">…“</span><span class="p">);</span>
+  <span class="n">Response</span><span class="p">.</span><span class="n">Flush</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">base</span><span class="p">.</span><span class="n">OnLoad</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+  <span class="p">}</span>
+  <span class="k">protected</span> <span class="k">override</span> <span class="k">void</span> <span class="nf">Render</span><span class="p">(</span><span class="n">HtmlTextWriter</span> <span class="n">writer</span><span class="p">)</span>
+  <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(!</span><span class="n">IsPostBack</span><span class="p">)</span>
+  <span class="p">{</span>
+  <span class="n">Response</span><span class="p">.</span><span class="n">Clear</span><span class="p">();</span>
+  <span class="n">Response</span><span class="p">.</span><span class="n">ClearContent</span><span class="p">();</span>
+  <span class="p">}</span>
+  <span class="k">base</span><span class="p">.</span><span class="n">Render</span><span class="p">(</span><span class="n">writer</span><span class="p">);</span>
+  <span class="p">}</span>
+</pre></div>
