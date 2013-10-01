@@ -1,4 +1,0 @@
-User-agent: *
-Disallow: 
-
-Sitemap: http://pkmishra.github.io/sitemap.xml 
