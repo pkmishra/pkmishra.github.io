@@ -67,6 +67,14 @@ navigation_elements: [
   {name: "About Me", link: "/about-me"},
     {name: "Code", link: "https://github.com/pkmishra"}]
 
+#octoflat theme settings
+navigation:
+- text: Home
+  url: /
+- text: About Me
+  url: /about-me
+- text: Code
+  url: https://github.com/pkmishra
 
 # Github repositories
 github_user: pkmishra
@@ -77,6 +85,9 @@ github_skip_forks: true
 # Twitter
 twitter_user: pkmishra
 twitter_tweet_button: true
+
+#LinkedIn
+linkedin_user: pradeepmishra
 
 # Google +1
 google_plus_one: false
