@@ -4,7 +4,7 @@
   <title><![CDATA[Category: techtips | Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/blog/categories/techtips/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2013-12-10T21:04:14+05:30</updated>
+  <updated>2013-12-10T22:12:25+05:30</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -18,13 +18,13 @@
     <link href="http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu/"/>
     <updated>2013-04-16T21:22:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu</id>
-    <content type="html"><![CDATA[<p>As discussed in <a href="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
+    <content type="html"><![CDATA[<p>As discussed in <a href="" title="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
 
 <!-- more -->
 
 
 <ul>
-<li>Add tor repository to your ubuntu repository list (See <a href="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
+<li>Add tor repository to your ubuntu repository list (See <a href="" title="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
 </ul>
 
 

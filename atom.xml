@@ -4,7 +4,7 @@
   <title><![CDATA[Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2013-12-10T21:04:14+05:30</updated>
+  <updated>2013-12-10T22:12:25+05:30</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -18,12 +18,12 @@
     <link href="http://pkmishra.github.io/blog/2013/12/10/twiscala-twitter-clone-in-scala/"/>
     <updated>2013-12-10T18:58:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/12/10/twiscala-twitter-clone-in-scala</id>
-    <content type="html"><![CDATA[<p>In this article I am going to talk about how to build a small twitter clone using Play Framework 2.1 , Scala as front end and Redis as backend. NetTuts+ has a very <a href="http://net.tutsplus.com/tutorials/building-ribbit-in-scala">good article</a> on the same topic with Mysql as backend and redis.io also has a <a href="http://redis.io/topics/twitter-clone">case study</a> of building twitter clone using php as front end. However my motivation behind this post is to understand how data modelling in redis works . Since NetTuts+ already has a source code of frontend therefore I just treid to reuse the same.</p>
+    <content type="html"><![CDATA[<p>In this article I am going to talk about how to build a small twitter clone using Play Framework 2.1 , Scala as front end and Redis as backend. NetTuts+ has a very <a href="" title="http://net.tutsplus.com/tutorials/building-ribbit-in-scala/">good article</a> on the same topic with Mysql as backend and redis.io also has a <a href="" title="http://redis.io/topics/twitter-clone">case study</a> of building twitter clone using php as front end. However my motivation behind this post is to understand how data modelling in redis works . Since NetTuts+ already has a source code of frontend therefore I just treid to reuse the same.</p>
 
 <!-- more -->
 
 
-<p>Redis is an awesome and very popular k-v store or rather data structure store. Though k-v can be strings but Redis also supports data types like List, Set, OrderedList, SortedSet etc which makes it even more appealing.  To know more about redis visit <a href="http://redis.io">redis.io</a> and to know about typical use case visit <a href="http://highscalability.com/blog/2011/7/6/11-common-web-use-cases-solved-in-redis.html">common-web-use-cases-solved-in-redis</a>.
+<p>Redis is an awesome and very popular k-v store or rather data structure store. Though k-v can be strings but Redis also supports data types like List, Set, OrderedList, SortedSet etc which makes it even more appealing.  To know more about redis visit <a href="" title="http://redis.io">redis.io</a> and to know about typical use case visit <a href="" title="http://highscalability.com/blog/2011/7/6/11-common-web-use-cases-solved-in-redis.html">common-web-use-cases-solved-in-redis</a>.
 Coming from RDBMS background, takes a while in understanding the k-v store, specially data modelling.  Let&rsquo;s go step by step for twiscala app&hellip;</p>
 
 <p>
@@ -103,7 +103,7 @@ Ribbit (Tweets)
 </p>
 
 
-<p>The application is just a POC to learn few  preliminary things about redis therefore I have not implemented functionality like followers and following. Sets  data structure can be used to keep track of followers and following people. For more detail do visit redis case study link given earlier. Entire source code of this application can be downloaded from <a href="https://github.com/pkmishra/scala-playground/tree/master/twiscala">this location</a>. If you want to learn more about data modelling see <a href="http://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques">nosql data modelling technique</a> Hopefully this will create  at least some curiosity about redis use cases.</p>
+<p>The application is just a POC to learn few  preliminary things about redis therefore I have not implemented functionality like followers and following. Sets  data structure can be used to keep track of followers and following people. For more detail do visit redis case study link given earlier. Entire source code of this application can be downloaded from <a href="" title="https://github.com/pkmishra/scala-playground/tree/master/twiscala">this location</a>. Hopefully this will create  at least some curiosity about redis use cases.</p>
 ]]></content>
   </entry>
   
@@ -121,7 +121,7 @@ Ribbit (Tweets)
 
 <ol>
 <li><p> An organization used cakePHP framework to build products. After a while a new manager is hired who is comfortable in codeIgniter so for new line of products he selects codeIgniter. Later the company hires another bright guy who likes to work in Laravel4 so Laravel was selected and so on. In this case personal choice and comfort is deciding the use of framework rather than what is in the best interest of the product and organization. What will happen over the period of time that you will not   I have seen similar things for other javascript frameworks as well.</p></li>
-<li><p> Another example is the buzzword BigData. Big data and NoSql is in fashion today and people who are dealing with 500GB of data talk about using nosql solutions without having full understanding. I have seen many examples where postgresql/mysql can be used to handle the data volume but no we want hadoop!. Chris has summarized this in <a href="http://www.chrisstucchio.com/blog/2013/hadoop_hatred.html">his blog</a> nicely.</p></li>
+<li><p> Another example is the buzzword BigData. Big data and NoSql is in fashion today and people who are dealing with 500GB of data talk about using nosql solutions without having full understanding. I have seen many examples where postgresql/mysql can be used to handle the data volume but no we want hadoop!. Chris has summarized this in <a href="" title="http://www.chrisstucchio.com/blog/2013/hadoop_hatred.html">his blog</a> nicely.</p></li>
 <li><p> And the last example is &ndash; worrying too much about scalability at the initial phase itself instead of making product valuable enough for the end user. Sometime it is good to cross the bridge when it comes.</p></li>
 </ol>
 
@@ -151,13 +151,13 @@ There are no set rules but one rule must be taken care of i.e. Solve the busines
     <link href="http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu/"/>
     <updated>2013-04-16T21:22:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/04/16/scrapy-run-using-tor-and-multiple-agents-part-2-ubuntu</id>
-    <content type="html"><![CDATA[<p>As discussed in <a href="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
+    <content type="html"><![CDATA[<p>As discussed in <a href="" title="http://pkmishra.github.io/technical/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents/">last post</a> this post is about running the same things on ubuntu. Again I am going to assume that you already have scrapy installed on your system. To install Tor</p>
 
 <!-- more -->
 
 
 <ul>
-<li>Add tor repository to your ubuntu repository list (See <a href="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
+<li>Add tor repository to your ubuntu repository list (See <a href="" title="https://www.torproject.org/docs/debian.html.en#ubuntu">official documentation</a> for more detail)</li>
 </ul>
 
 
@@ -349,7 +349,7 @@ Hope this helps!!!</p>
     <updated>2013-01-16T23:33:00+05:30</updated>
     <id>http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate</id>
     <content type="html"><![CDATA[<p>As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
-1. <a href="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
+1. <a href="" title="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
 2. sbt 0.12.1 installed.</p>
 
 <!-- more -->
@@ -376,6 +376,7 @@ This will prompt you to give values to variables like project <code>name</code>,
 <span class='line-number'>8</span>
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
+<span class='line-number'>11</span>
 </pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">sbt._</span>
 </span><span class='line'><span class="k">import</span> <span class="nn">Defaults._</span>
 </span><span class='line'>
@@ -386,6 +387,7 @@ This will prompt you to give values to variables like project <code>name</code>,
 </span><span class='line'>   <span class="n">sbtV</span> <span class="k">=</span> <span class="s">&quot;0.12&quot;</span><span class="o">,</span>    <span class="c1">// SBT version</span>
 </span><span class='line'>   <span class="n">scalaV</span> <span class="k">=</span> <span class="s">&quot;2.9.2&quot;</span>    <span class="c1">// Scala version compiled the plugin</span>
 </span><span class='line'><span class="o">)</span>
+</span><span class='line'>
 </span></code></pre></td></tr></table></div></figure>
 
 </p>
