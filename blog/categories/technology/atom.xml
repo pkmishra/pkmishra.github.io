@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: technology | Pradeep Mishra]]></title>
+  <link href="http://pkmishra.github.io/blog/categories/technology/atom.xml" rel="self"/>
+  <link href="http://pkmishra.github.io/"/>
+  <updated>2013-12-10T20:50:04+05:30</updated>
+  <id>http://pkmishra.github.io/</id>
+  <author>
+    <name><![CDATA[Pradeep Kumar Mishra]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Twiscala: Twitter Clone in Scala]]></title>
+    <link href="http://pkmishra.github.io/blog/2013/12/10/twiscala-twitter-clone-in-scala/"/>
+    <updated>2013-12-10T18:58:00+05:30</updated>
+    <id>http://pkmishra.github.io/blog/2013/12/10/twiscala-twitter-clone-in-scala</id>
+    <content type="html"><![CDATA[<p>In this article I am going to talk about how to build a small twitter clone using Play Framework 2.1 , Scala as front end and Redis as backend. NetTuts+ has a very <a href="" title="http://net.tutsplus.com/tutorials/building-ribbit-in-scala/">good article</a> on the same topic with Mysql as backend and redis.io also has a <a href="" title="http://redis.io/topics/twitter-clone">case study</a> of building twitter clone using php as front end. However my motivation behind this post is to understand how data modelling in redis works . Since NetTuts+ already has a source code of frontend therefore I just treid to reuse the same.</p>
+
+<!-- more -->
+
+
+<p>Redis is an awesome and very popular k-v store or rather data structure store. Though k-v can be strings but Redis also supports data types like List, Set, OrderedList, SortedSet etc which makes it even more appealing.  To know more about redis visit <a href="" title="http://redis.io">redis.io</a> and to know about typical use case visit <a href="" title="http://highscalability.com/blog/2011/7/6/11-common-web-use-cases-solved-in-redis.html">common-web-use-cases-solved-in-redis</a>.
+Coming from RDBMS background, takes a while in understanding the k-v store, specially data modelling.  Let&rsquo;s go step by step for twiscala app&hellip;</p>
+
+<p>
+User and Authentication
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Account.scala </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'> <span class="nc">RedisDB</span><span class="o">.</span><span class="n">withClient</span> <span class="o">{</span>
+</span><span class='line'>        <span class="n">client</span> <span class="k">=&gt;</span>
+</span><span class='line'>          <span class="k">val</span> <span class="n">uid</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">incr</span><span class="o">(</span><span class="s">&quot;global:nextuid&quot;</span><span class="o">).</span><span class="n">get</span>
+</span><span class='line'>          <span class="n">client</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;uid:&quot;</span> <span class="o">+</span> <span class="n">uid</span> <span class="o">+</span> <span class="s">&quot;:email&quot;</span><span class="o">,</span> <span class="n">email</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">client</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;uid:&quot;</span> <span class="o">+</span> <span class="n">uid</span> <span class="o">+</span> <span class="s">&quot;:name&quot;</span><span class="o">,</span> <span class="n">name</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">client</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;uid:&quot;</span> <span class="o">+</span> <span class="n">uid</span> <span class="o">+</span> <span class="s">&quot;:password&quot;</span><span class="o">,</span> <span class="nc">BCrypt</span><span class="o">.</span><span class="n">hashpw</span><span class="o">(</span><span class="n">password</span><span class="o">,</span> <span class="nc">BCrypt</span><span class="o">.</span><span class="n">gensalt</span><span class="o">()))</span>
+</span><span class='line'>          <span class="n">client</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;email:&quot;</span> <span class="o">+</span> <span class="n">email</span> <span class="o">+</span> <span class="s">&quot;:uid&quot;</span><span class="o">,</span> <span class="n">uid</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+Here we are using global:nextuid key to get the next available value of uid (similar to auto increment pk value in rdbms) and later all the attributes are being set based on uid: :attribute based key so that if one has the uid , all the attributes are easily retreivable.
+Last key in the code above has been set to make uid available by email id.
+</p>
+
+
+<p><p>
+Ribbit (Tweets)
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>Account.scala </span></figcaption>
+ <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="nc">RedisDB</span><span class="o">.</span><span class="n">withClient</span> <span class="o">{&lt;/</span><span class="n">p</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">pre</span><span class="o">&gt;&lt;</span><span class="n">code</span><span class="o">&gt;</span>  <span class="n">client</span> <span class="o">=&amp;</span><span class="n">gt</span><span class="o">;</span>
+</span><span class='line'>        <span class="k">val</span> <span class="n">postId</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">incr</span><span class="o">(</span><span class="s">&quot;global:nextRibbitId&quot;</span><span class="o">).</span><span class="n">get</span>
+</span><span class='line'>        <span class="n">println</span><span class="o">(</span><span class="n">postId</span><span class="o">)</span>
+</span><span class='line'>       <span class="n">client</span><span class="o">.</span><span class="n">set</span><span class="o">(</span><span class="s">&quot;ribbit:&quot;</span> <span class="o">+</span> <span class="n">postId</span> <span class="o">+</span> <span class="s">&quot;:post&quot;</span><span class="o">,</span> <span class="n">sender</span><span class="o">.</span><span class="n">get</span> <span class="o">+</span> <span class="s">&quot;|&quot;</span> <span class="o">+</span> <span class="nc">DateTime</span><span class="o">.</span><span class="n">now</span><span class="o">()</span> <span class="o">+</span> <span class="s">&quot;|&quot;</span> <span class="o">+</span> <span class="n">content</span><span class="o">)</span>
+</span><span class='line'>        <span class="k">val</span> <span class="n">account</span> <span class="k">=</span> <span class="nc">Account</span><span class="o">.</span><span class="n">findByEmail</span><span class="o">(</span><span class="n">sender</span><span class="o">.</span><span class="n">get</span><span class="o">).</span><span class="n">get</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">val</span> <span class="n">followers</span> <span class="k">=</span> <span class="n">client</span><span class="o">.</span><span class="n">smembers</span><span class="o">(</span><span class="s">&quot;uid:&quot;</span> <span class="o">+</span> <span class="n">account</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s">&quot;:followers&quot;</span><span class="o">)</span>
+</span><span class='line'>        <span class="k">if</span> <span class="o">(</span><span class="n">followers</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;</span><span class="n">amp</span><span class="o">;&amp;</span><span class="n">amp</span><span class="o">;</span> <span class="n">followers</span><span class="o">.</span><span class="n">isDefined</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>          <span class="k">for</span> <span class="o">(</span><span class="n">follower</span> <span class="o">&amp;</span><span class="n">lt</span><span class="o">;-</span> <span class="n">followers</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">client</span><span class="o">.</span><span class="n">lpush</span><span class="o">(</span><span class="s">&quot;uid:&quot;</span> <span class="o">+</span> <span class="n">follower</span> <span class="o">+</span> <span class="s">&quot;:posts&quot;</span><span class="o">,</span> <span class="n">postId</span><span class="o">)</span>
+</span><span class='line'>
+</span><span class='line'>          <span class="o">}</span>
+</span><span class='line'>          <span class="n">client</span><span class="o">.</span><span class="n">lpush</span><span class="o">(</span><span class="s">&quot;global:timeline&quot;</span><span class="o">,</span> <span class="n">postId</span><span class="o">)</span>
+</span><span class='line'>          <span class="n">client</span><span class="o">.</span><span class="n">ltrim</span><span class="o">(</span><span class="s">&quot;global:timeline&quot;</span><span class="o">,</span> <span class="mi">0</span><span class="o">,</span> <span class="mi">1000</span><span class="o">)</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">&lt;/</span><span class="n">code</span><span class="o">&gt;&lt;/</span><span class="n">pre</span><span class="o">&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="o">&lt;</span><span class="n">p</span><span class="o">&gt;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+ See carefully how ribbit key has bee constructed and how we are using List to keep all the ribbit  in order of the time , most recent to old.
+</p>
+The application is just a POC to learn few  preliminary things about redis therefore I have not implemented functionality like followers and following. Sets  data structure can be used to keep track of followers and following people. For more detail do visit redis case study link given earlier. Entire source code of this application can be downloaded from <a href="" title="https://github.com/pkmishra/scala-playground/tree/master/twiscala">this location</a>. Hopefully this will create  at least some curiosity about redis use cases.</p>
+]]></content>
+  </entry>
+  
+</feed>
