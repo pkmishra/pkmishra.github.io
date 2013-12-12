@@ -12,7 +12,7 @@ My belief is that technology should be selected based on the business problem yo
 
   1. An organization used cakePHP framework to build products. After a while a new manager is hired who is comfortable in codeIgniter so for new line of products he selects codeIgniter. Later the company hires another bright guy who likes to work in Laravel4 so Laravel was selected and so on. In this case personal choice and comfort is deciding the use of framework rather than what is in the best interest of the product and organization. What will happen over the period of time that you will not   I have seen similar things for other javascript frameworks as well.
 
-  2. Another example is the buzzword BigData. Big data and NoSql is in fashion today and people who are dealing with 500GB of data talk about using nosql solutions without having full understanding. I have seen many examples where postgresql/mysql can be used to handle the data volume but no we want hadoop!. Chris has summarized this in [his blog]("http://www.chrisstucchio.com/blog/2013/hadoop_hatred.html") nicely.
+  2. Another example is the buzzword BigData. Big data and NoSql is in fashion today and people who are dealing with 500GB of data talk about using nosql solutions without having full understanding. I have seen many examples where postgresql/mysql can be used to handle the data volume but no we want hadoop!. Chris has summarized this in [his blog](http://www.chrisstucchio.com/blog/2013/hadoop_hatred.html) nicely.
 
   3. And the last example is - worrying too much about scalability at the initial phase itself instead of making product valuable enough for the end user. Sometime it is good to cross the bridge when it comes. 
 

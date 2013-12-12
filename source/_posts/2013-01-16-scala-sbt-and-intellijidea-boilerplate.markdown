@@ -6,7 +6,7 @@ comments: true
 categories: productivity boilerplate
 ---
 As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
-1. [giter8]("https://github.com/n8han/giter8") installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
+1. [giter8](https://github.com/n8han/giter8) installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
 2. sbt 0.12.1 installed. 
 <!-- more -->
 Please note that sbt0.12 doesn't support scala 2.10 therefore this help is for those who wants to set up sbt 0.12 with scala 2.10. <br />
