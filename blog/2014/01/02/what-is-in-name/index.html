@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Scala, SBT and IntellijIdea boilerplate - Pradeep Mishra</title>
+  <title>What is in name - Pradeep Mishra</title>
   <meta name="author" content="Pradeep Kumar Mishra">
 
    
@@ -19,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate">
+  <link rel="canonical" href="http://pkmishra.github.io/blog/2014/01/02/what-is-in-name">
   <link href="/favicon.png" rel="icon">
   <link href='http://fonts.googleapis.com/css?family=Quicksand:300,400' rel='stylesheet' type='text/css'>
   <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300' rel='stylesheet' type='text/css'>
@@ -98,7 +98,7 @@
 
   <header>
   <div class="jumbotron">
-    Scala, SBT and IntellijIdea Boilerplate
+    What Is in Name
 	<h5>
 
 
@@ -111,66 +111,44 @@
   
 
 
-<i class="icon-calendar-empty"></i> <time datetime="2013-01-16T23:33:00+05:30" pubdate data-updated="true">Jan 16<span>th</span>, 2013</time></h5>
+<i class="icon-calendar-empty"></i> <time datetime="2014-01-02T23:00:00+05:30" pubdate data-updated="true">Jan 2<span>nd</span>, 2014</time></h5>
   </div>
 </header>
   <div class="row-fluid">
     <div class="span12">
-      <p>As I started delving into facets of Scala language I spent a lot of time in figuring out various tools for better productivity. Finally I was up and running with the basic setup though after lots of efforts. Therefore I am writing this post to help other newbies in setting up the basic project structure so that one may start being productive immediately. Before starting on how to setup things, please make sure you have <br />
-1. <a href="https://github.com/n8han/giter8">giter8</a> installed. If you are using typesafe stack like me you will have it as typesafe-stack-folder/bin/g8. <br />
-2. sbt 0.12.1 installed.</p>
+      <p>I know you are always asked to follow appropriate naming conventions and consistent naming patterns while you are writing code but do you wonder if you apply the same thing in real life? or if your organization is also promoting same thing in whatever communication they do or whatever artifacts they create?</p>
 
 <!-- more -->
 
 
-<p>Please note that sbt0.12 doesn&rsquo;t support scala 2.10 therefore this help is for those who wants to set up sbt 0.12 with scala 2.10. <br />
-Alright let the fun begin now&hellip;<br />
-+ run following command to download the template project <br />
-<code>g8 pkmishra/scala-sbt-idea-boilerplate.g8</code> <br />
-This will prompt you to give values to variables like project <code>name</code>, <code>organization</code>, <code>version</code> and <code>scalaVersion</code>. You may also select the default values. The template project is located at <a href="https://github.com/pkmishra/scala-sbt-idea-boilerplate.g8">scala-sbt-idea-boilerplate</a> <br />
-+ make directory called ~/.sbt/plugins and created file build.sbt if it doesn&rsquo;t exist already. <br/>
-+ Write following lines to this build.sbt file so that sbt-idea plugin may be downloaded which is going to be used later&hellip; <br /></p>
+<p>Following a set pattern or convention in naming is very important for any organization specially a growing one where things are moving fast and are already chaotic. Let&rsquo;s go through few examples where one can easily use set patterns&hellip;</p>
 
-<p>
+<h1>Email</h1>
 
-<figure class='code'><figcaption><span>build.sbt </span></figcaption>
- <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='scala'><span class='line'><span class="k">import</span> <span class="nn">sbt._</span>
-</span><span class='line'><span class="k">import</span> <span class="nn">Defaults._</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">resolvers</span> <span class="o">+=</span> <span class="s">&quot;Sonatype snapshots&quot;</span> <span class="n">at</span> <span class="s">&quot;http://oss.sonatype.org/content/repositories/snapshots/&quot;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">libraryDependencies</span> <span class="o">+=</span> <span class="n">sbtPluginExtra</span><span class="o">(</span>
-</span><span class='line'>   <span class="n">m</span> <span class="k">=</span> <span class="s">&quot;com.github.mpeltonen&quot;</span> <span class="o">%</span> <span class="s">&quot;sbt-idea&quot;</span> <span class="o">%</span> <span class="s">&quot;1.3.0-SNAPSHOT&quot;</span><span class="o">,</span> <span class="c1">// Plugin module name and version</span>
-</span><span class='line'>   <span class="n">sbtV</span> <span class="k">=</span> <span class="s">&quot;0.12&quot;</span><span class="o">,</span>    <span class="c1">// SBT version</span>
-</span><span class='line'>   <span class="n">scalaV</span> <span class="k">=</span> <span class="s">&quot;2.9.2&quot;</span>    <span class="c1">// Scala version compiled the plugin</span>
-</span><span class='line'><span class="o">)</span>
-</span><span class='line'>
-</span></code></pre></td></tr></table></div></figure>
+<p>Email is one of the primary modes of communication in any organization. How many times have you observed closely if there is any pattern in the various email addresses created in your organization. or if there isn&rsquo;t any!. A person with name John Smith can have email address with so many combinations e.g. <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;&#x3a;&#x6a;&#115;&#109;&#105;&#116;&#x68;&#64;&#109;&#x79;&#99;&#111;&#109;&#x70;&#97;&#x6e;&#121;&#46;&#x63;&#111;&#109;">&#106;&#x73;&#x6d;&#x69;&#116;&#104;&#64;&#109;&#121;&#x63;&#x6f;&#109;&#x70;&#x61;&#110;&#x79;&#46;&#x63;&#111;&#x6d;</a> or <a href="&#x6d;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x6a;&#111;&#x68;&#x6e;&#115;&#64;&#109;&#x79;&#99;&#x6f;&#109;&#112;&#x61;&#x6e;&#x79;&#x2e;&#99;&#111;&#109;">&#106;&#x6f;&#x68;&#110;&#115;&#64;&#109;&#121;&#99;&#x6f;&#x6d;&#x70;&#97;&#110;&#121;&#x2e;&#99;&#111;&#109;</a> or <a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#x6a;&#111;&#x68;&#110;&#46;&#x73;&#x6d;&#x69;&#x74;&#x68;&#x40;&#109;&#121;&#x63;&#x6f;&#x6d;&#x70;&#x61;&#x6e;&#x79;&#46;&#99;&#111;&#109;">&#106;&#111;&#x68;&#110;&#x2e;&#115;&#x6d;&#105;&#116;&#104;&#64;&#109;&#121;&#x63;&#x6f;&#x6d;&#x70;&#97;&#x6e;&#x79;&#x2e;&#99;&#111;&#109;</a> or <a href="&#x6d;&#97;&#105;&#108;&#116;&#111;&#58;&#106;&#115;&#64;&#109;&#x79;&#99;&#x6f;&#109;&#112;&#x61;&#110;&#121;&#x2e;&#99;&#x6f;&#x6d;">&#x6a;&#x73;&#64;&#109;&#121;&#x63;&#111;&#x6d;&#112;&#97;&#x6e;&#121;&#46;&#x63;&#x6f;&#109;</a> to name a few.  I have seen so many organizations not following any patterns. Depending upon sysadmin mood you can get any address. I do understand you can always find people in the address book but if you have set guidelines things become uniform and better organized. Few guidelines I can think of are…</p>
 
-</p>
+<pre><code>- firstName.lastName@mycompany.com (My favorite)
+    - In case of conflict use firstName.(Initital of MiddleName).lastName@mycompany.com
+- (Initial of First Name).lastName@mycompany.com
+</code></pre>
 
+<p>Similarly one can device own set of conventions while creating different internal groups.</p>
 
-<ul>
-<li>Now go to the root of the project you have generated (e.g. if you have keep it default name should be basic-project) and run following command.<br />
-sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
-This will generate all the idea project files. <br /></li>
-<li>Boom!! now you can open Idea IDE and open the project. To see the output just run command sbt run.</li>
-<li><em>Make sure to run following command everytime you add/remove a new dependency in your project build.sbt file.</em> <br />
-sbt &ldquo;gen-idea no-sbt-build-module&rdquo; <br />
-This will keep everything upto date and you won&rsquo;t get any compilation error in Intellij Idea. Hope this helps!!!</li>
-</ul>
+<h1>Documents</h1>
 
+<p>Following appropriate guidelines while naming document is again very important. It helps in finding and organizing your documents easily. The key is that without opening the document one should be able to easily figure out the purpose and owner of the document. By owner I mean at least the department of the organization to which the document belong. You can find lot of guidelines if you google with term &lsquo;document naming conventions best practices&rsquo;.  Few guidelines I can suggest are&hellip;</p>
+
+<pre><code>- CompanyAbreviation_DepartmentName_DocumentTitle_(Draft... if not final)_DD_MM_YYYY e.g. MYCMP_ENGG_Feature.Detailed.Design.draft_JAN_2014
+- Document.Title_DepartmentName.DD.MM.YYYY e.g. Feature.Detailed.Design_ENGG_02.01.2014
+</code></pre>
+
+<h1>Signature</h1>
+
+<p>It is very important that everyone in organization is using exact same format for email signatures (if you are using). Consider this more of a marketing guidelines.</p>
+
+<p>You may apply same thing to almost anything you are dealing with be it source code repositories, conference room names or your digital assets.</p>
+
+<p> It may seem trivial things but you never know when things get out of your hands and too chaotic. So if you are a startup or small growing organization set some guidelines on naming patterns. It won&rsquo;t take 30 mins of your time to decide upon conventions. The key thing is that you are setting up some guidelines to start with but you are consistent with that. Key beneficiaries of this effort is going to be the new people joining your awesome team. Believe me they will love it.</p>
 
     </div>
   </div>
@@ -189,9 +167,9 @@ This will keep everything upto date and you won&rsquo;t get any compilation erro
 
 
 
-  <a href="/blog/categories/boilerplate/"><span class="badge">boilerplate</span></a>
+  <a href="/blog/categories/general,/"><span class="badge">general,</span></a>
 
-  <a href="/blog/categories/productivity/"><span class="badge">productivity</span></a>
+  <a href="/blog/categories/tips/"><span class="badge">tips</span></a>
 
 
 
@@ -221,10 +199,8 @@ This will keep everything upto date and you won&rsquo;t get any compilation erro
       <div class="span12">
         <p class="meta">
           
-            <a class="basic-alignment left" href="/blog/2008/04/13/linq-to-sql-dynamic-sorting-without-using-complete-dynamic-linq-libraries/" title="Previous Post: Linq to Sql: Dynamic Sorting without using Complete Dynamic Linq Libraries">&laquo; Linq to Sql: Dynamic Sorting without using Complete Dynamic Linq Libraries</a>
+            <a class="basic-alignment left" href="/blog/2013/12/10/twiscala-twitter-clone-in-scala/" title="Previous Post: Twiscala: Twitter Clone in Scala">&laquo; Twiscala: Twitter Clone in Scala</a>
           
-          
-            <a class="basic-alignment right" href="/blog/2013/03/18/how-to-run-scrapy-with-TOR-and-multiple-browser-agents-part-1-mac/" title="Next Post: Scrapy: run using TOR and multiple agents">Scrapy: run using TOR and multiple agents &raquo;</a>
           
         </p>
       </div>
@@ -263,8 +239,8 @@ This will keep everything upto date and you won&rsquo;t get any compilation erro
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/';
-        var disqus_url = 'http://pkmishra.github.io/blog/2013/01/16/scala-sbt-and-intellijidea-boilerplate/';
+        var disqus_identifier = 'http://pkmishra.github.io/blog/2014/01/02/what-is-in-name/';
+        var disqus_url = 'http://pkmishra.github.io/blog/2014/01/02/what-is-in-name/';
         var disqus_script = 'embed.js';
       
     (function () {
