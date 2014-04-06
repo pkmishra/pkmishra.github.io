@@ -4,7 +4,7 @@
   <title><![CDATA[Category: techtips | Pradeep Mishra]]></title>
   <link href="http://pkmishra.github.io/blog/categories/techtips/atom.xml" rel="self"/>
   <link href="http://pkmishra.github.io/"/>
-  <updated>2014-01-20T22:35:29+05:30</updated>
+  <updated>2014-04-07T00:04:09+05:30</updated>
   <id>http://pkmishra.github.io/</id>
   <author>
     <name><![CDATA[Pradeep Kumar Mishra]]></name>
@@ -72,7 +72,7 @@
 
 
 <p><div class='bogus-wrapper'><notextile><figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>curl &amp;mdash;proxy &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;http://localhost:8123&quot;</span>&gt;http://localhost:8123&lt;/a&gt; &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://check.torproject.org/&quot;</span>&gt;https://check.torproject.org/&lt;/a&gt; | grep &amp;ldquo;Congratulations. Your browser is configured to use Tor&amp;rdquo;
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>curl &amp;mdash;proxy &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;http://localhost:8123&quot;</span>&gt;http://localhost:8123&lt;/a&gt; &lt;a <span class="nv">href</span><span class="o">=</span><span class="s2">&quot;https://check.torproject.org/&quot;</span>&gt;https://check.torproject.org/&lt;/a&gt; | grep &amp;ldquo;Congratulations. This browser is configured to use Tor&amp;rdquo;
 </span></code></pre></td></tr></table></div></figure></notextile></div></p>
 
 <p>You can see you will get this text displayed if everything is working. You are all set now.
