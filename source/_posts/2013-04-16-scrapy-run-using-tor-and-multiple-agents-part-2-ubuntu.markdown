@@ -44,7 +44,7 @@ using sudo /etc/init.d/polipo restart
 + Now check whether tor is working fine or not by running 
 
 {% codeblock lang:sh %}
-curl --proxy http://localhost:8123 https://check.torproject.org/ | grep "Congratulations. Your browser is configured to use Tor"
+curl --proxy http://localhost:8123 https://check.torproject.org/ | grep "Congratulations. This browser is configured to use Tor"
 {% endcodeblock %}
 
 
