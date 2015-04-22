@@ -13,7 +13,7 @@ How we can motivate our team and bring efficiency into whatever we do. Hiring go
 
 + Set the weekly objectives and push people to make sure they achieve that. You must hold everyone accountable and bring ownership. These small wins and sense of achievement can do wonders.
 
-+ Have flexible work hours however don't forget to set core hours where everyone should be approchable.
++ Have flexible work hours however don't forget to set core hours where everyone should be approachable.
 
 + Make 'connect' with your team members, be fair towards everyone and towards the organization need. 
 
@@ -23,7 +23,7 @@ How we can motivate our team and bring efficiency into whatever we do. Hiring go
 
 + Encourage and reward taking risks and moving fast.
 
-+ Give freedom to your team and create oppportunties to bring the best out in your team.
++ Give freedom to your team and create opportunities to bring the best out in your team.
 
 + Ship code frequently.
 
