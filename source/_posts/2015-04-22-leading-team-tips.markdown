@@ -8,7 +8,7 @@ categories: [People, Management]
 How we can motivate our team and bring efficiency into whatever we do. Hiring good is a well known challenge and so is managing people. Here are few pointers for managers...
 
 + Explain your team members what do you expect from them and what should they expect from you? Analyze if there is any mismatch and fix that. Remember this will change as per the role/experience level of your team member.
-
+<!-- more -->
 + Set the appropriate goals. Also explain different levels of performance evaluation with respect to each goal i.e. When they will be exceeding the expectations and when they will be meeting the expectation. e.g. If someone at senior level is just doing the job and not taking initiative and ownership she is not meeting the expectations.
 
 + Set the weekly objectives and push people to make sure they achieve that. You must hold everyone accountable and bring ownership. These small wins and sense of achievement can do wonders.
